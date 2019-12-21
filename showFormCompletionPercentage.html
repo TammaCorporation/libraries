@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .survey-completion-indicator {
+        	width: 70px;
+        	height: 150px;
+        	background: rgba(53, 194, 255, 0.6);
+        	text-align: center;
+        	position: fixed;
+        	top: 40%;
+        	right: 0;
+        	border-top-left-radius: 40%;
+        	border-bottom-left-radius: 40%;
+       }
+		   .numerator {
+			   margin: 50% 0 0 0;
+		   }
+		   .survey-completion-indicator >  .numerator_line {
+
+		   }
+		   .survey-completion-indicator >  .devisor {
+
+		   }
+    </style>
+ </head>
+ <body>
+ 		<!-- percentage viwer -->
+		<div class="survey-completion-indicator blue lighten-1">
+			<div class="numerator">0</div>
+			<div class="numerator_line"><hr></div>
+			<div class="devisor">0</div>
+		</div>
+    
+         <!-- School profile form view -->
+        <div class=" school-profile-form-view custom-activity mb-5 form custom-margin-top">
+            <!-- form title -->
+            <div class="container text-center mb-4">
+                <i class="far fa-school text-muted fa-2x animated pulse"></i><br>
+                <br>
+                <p><i>
+                    Ask the school principal to provide the following information about the school 
+                </i></p>
+            </div>
+            <form class="p-0 text-dark" id="School-Profile">
+                <!-- main contents -->
+                <div class="form_slider p-0">
+                    <!-- step 1 (acquire schoolname to match against EMIS code) -->
+                    <div class="form_slider_view" style="overflow: hidden">
+                        <!-- Full name of New school -->
+                        <div id="new_school_name_div" class="hidden">
+                            <div class="mb-4 mt-2">
+                                <label for="new_school_name">1) Write the full name of the school in CAPITAL LETTERS: </label>
+                                <input type="text" id="new_school_name" name="new_school_name" class="form-control" autocomplete="off">
+                            </div>
+                            <i id="selectKnownSchool" class="fas fa-minus text-info fa-1x"> Select Known School</i><br><br>
+                        </div>
+                        <!-- Select Known School -->
+                        <div class="mb-4 school_selection_for_census" id="dropdownforExistingschoolProfile">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                                        
+                                    <label for="">1) Please select the school's name from the list to profile</label>
+                                    <select 
+                                        class="dynamicSchoolNames school_emis_code school_name activateOtherQuestions browser-default custom-select md-custom-select text-dark font-weight-normal load-saved-survey" 
+                                        id="pickSchoolForCensus"
+                                        required 
+                                        name="the curlprit"
+                                        autocomplete="off">
+                                        <option selected  value="">Select an option</option>
+                                    </select>
+                                    <br><br>
+                                    <i id="addNewSchool" class="fas fa-plus text-primary fa-1x"> Add A New School</i><br>
+                                    <i class="text-info">
+                                        <b>NOTE:</b> 
+                                        Creating a new school will generate a new EMIS code. <br> 
+                                        New schools will be verified by the central office and CEO
+                                    </i> 
+                                    <br><br>
+                                </div>
+                            </div> 
+                        </div>
+                        <!-- Full name of principal -->
+                        <div class="mb-4">
+                            <label for="principal_name" name="1" class="">2) What is the full name of the school's principal?</label>
+                            <input type="text" id="principal_name" class="form-control" required autocomplete="off">
+                        </div>
+                        <!-- School Type -->
+                        <div class="mb-4">
+                            <div class="form-group mb-0">
+                                <label for="">3) <b>Type of school</b> Tick ONE answer </label>
+                            </div>
+                            <div class="row p-3">
+                                <!-- Public School -->
+                                <div class="custom-control custom-radio col-xl-12 mb-1">
+                                    <input type="radio" class="custom-control-input SchoolType" id="Public_School" name="school_type" value="Public School">
+                                    <label class="custom-control-label text-dark" for="Public_School">Public School:</label>
+                                </div>
+        
+                                <!-- Private School -->
+                                <div class="custom-control custom-radio col-xl-12 mb-1">
+                                    <input type="radio" class="custom-control-input SchoolType" id="PrivateSchool" name="school_type" value="Private School">
+                                    <label class="custom-control-label text-dark" for="PrivateSchool">Private School:</label>
+                                </div>
+        
+                                <!-- Faith Based School -->
+                                <div class="custom-control custom-radio col-xl-12 mb-1">
+                                    <input type="radio" class="custom-control-input SchoolType" id="Faith_Based" name="school_type" value="Faith Based School">
+                                    <label class="custom-control-label text-dark" for="Faith_Based">Faith-Based School:</label>
+                                </div>
+        
+                                <!-- Community School -->
+                                <div class="custom-control custom-radio col-xl-12 mb-1">
+                                    <input type="radio" class="custom-control-input SchoolType" id="Community_School" name="school_type" value="Community School">
+                                    <label class="custom-control-label text-dark" for="Community_School">Community School:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- MOE Accreditation -->
+                        <div class="mb-4">
+                            <!-- New Changes -->
+                            <label for="school_accreditation">4) <b>School accreditation:</b> Has the school been accredited by the Ministry of Education? </label>
+
+                            <br><br>
+                            <label><input type="radio" name="school_accreditation" id="school_accreditation1" value="yes" required> Yes </label>
+                            <br>
+                            <label><input type="radio" name="school_accreditation" id="school_accreditation2" value="no"> No </label>
+
+                            <!-- <select class="browser-default custom-select md-custom-select text-dark font-weight-normal" 
+                            id="school_accreditation"
+                            name="school_accreditation" required autocomplete="off">
+                                <option selected disabled value="">Select an option</option>
+                                <option value="yes"> Yes </option>
+                                <option value="no"> No </option>
+                            </select> -->
+
+
+                        </div>
+                        <!-- Town or community -->
+                        <div class="mb-4">
+                            <label for="specific_location">5) <b>Location</b> Write the name of your school’s village, town and/or community</label>
+                            <input type="text" id="specific_location" class="form-control" required autocomplete="off">
+                            <!-- <input type="text" id="specific_location" class="form-control"  pattern="[^'\x22]+" required autocomplete="off"> -->
+                        </div>
+                        <!-- Phone number -->
+                        <div class="mb-4">
+                            <label for="phone_number">6) <b>School Contact</b> Write the school’s primary contact phone number </label>
+                            <input type="text" id="phone_number" class="form-control phone_number_eval" maxlength="10" 
+                             onkeyup="MatchPhoneNumber('phone_number_eval', 'phone_number_err')" 
+                             placeholder="eg: 0777001001" required autocomplete="off">
+                            <span class="phone_number_err"></span>
+                        </div>
+                        <!-- Email address -->
+                        <div class="mb-4">
+                            <label for="email_address">7) <b>School Contact</b> Write the school’s primary contact email address.</label>
+                            <input type="email" id="email_address" class="form-control" autocomplete="off">
+                            <i class="text-info">* Optional</i>
+                        </div>
+                        <!-- school Permit -->
+                        <div class="mb-4">
+                            <div class="form-group mb-0">
+                                <label for="">8) <b>School Permit </b> Has the school obtained a permit for operation from the Ministry of Education? </label>
+                            </div>
+                            <div class="row p-3">
+                                <!-- Default unchecked -->
+                                <div class="custom-control custom-radio col-xl-12 mb-1">
+                                    <input type="radio" class="custom-control-input " id="schoolPermit1" name="school_permit" required value="permit">
+                                    <label class="custom-control-label text-dark" for="schoolPermit1"> Yes, the school has a permit</label>
+                                </div>
+                                <!-- Default checked -->
+                                <div class="custom-control custom-radio col-xl-12 mb-1">
+                                    <input type="radio" class="custom-control-input " id="schoolPermit2" name="school_permit" value="no permit">
+                                    <label class="custom-control-label text-dark" for="schoolPermit2"> No, the school does not have a permit</label>
+                                </div>   
+                            </div>                         
+                        </div>
+                        <!-- School location type -->
+                        <div class="mb-4">
+                            <div class="form-group mb-0">
+                                <label for="">9) Tick whether the school is in a rural or urban area </label>
+                            </div>
+                            <div class="row p-3">
+                                <!-- Default unchecked -->
+                                <div class="custom-control custom-radio col-xl-12 mb-1">
+                                    <input type="radio" class="custom-control-input schoolLocation" id="URBAN" name="rural_or_urban" required value="Rural">
+                                    <label class="custom-control-label text-dark" for="URBAN">The location type is rural (village, town)</label>
+                                </div>
+                                <!-- Default checked -->
+                                <div class="custom-control custom-radio col-xl-12 mb-1">
+                                    <input type="radio" class="custom-control-input schoolLocation" id="RURAL" name="rural_or_urban" value="urban">
+                                    <label class="custom-control-label text-dark" for="RURAL">The location type ts urban (city, metropolis)</label>
+                                </div>    
+                            </div>                        
+                        </div>
+                        <!-- School Level -->
+                        <div class="mb-4">
+                            <div class="form-group mb-0">
+                                <label for="">10) <b>Level of school</b> Tick all that are applicable. Most schools have multiple levels  </label>
+                            </div>
+                            <div class="row p-3">
+                                <!-- Default unchecked -->
+                                <div class="custom-control custom-checkbox col-12 mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="school_level_ECE" name="school_level" value="1">
+                                    <label class="custom-control-label text-dark" for="school_level_ECE">Early Childhood Education</label>
+                                </div>
+                                <!-- Default checked -->
+                                <div class="custom-control custom-checkbox col-12 mb-1">
+                                    <input type="checkbox" 
+                                    class="custom-control-input" 
+                                    id="school_level_PE" 
+                                    name="school_level" 
+                                    value="1" 
+                                    onclick="unhideHiddenOption('waec_grade_6')">
+                                    <label class="custom-control-label text-dark" for="school_level_PE">Primary Education</label>
+                                </div>                            
+                                <!-- Default unchecked -->
+                                <div class="custom-control custom-checkbox col-12 mb-1">
+                                    <input type="checkbox" 
+                                    class="custom-control-input" 
+                                    id="school_level_JHS" 
+                                    name="school_level" 
+                                    value="1" 
+                                    onclick="unhideHiddenOption('waec_grade_9')">
+                                    <label class="custom-control-label text-dark" for="school_level_JHS">Junior High</label>
+                                </div>
+                                <!-- Default checked -->
+                                <div class="custom-control custom-checkbox col-12 mb-1">
+                                    <input type="checkbox" 
+                                    class="custom-control-input" 
+                                    id="school_level_SHS" 
+                                    name="school_level" 
+                                    value="1" 
+                                    onclick="unhideHiddenOption('waec_grade_12')">
+                                    <label class="custom-control-label text-dark" for="school_level_SHS">Senior High</label>
+                                </div>                
+                                <!-- Default checked -->
+                                <div class="custom-control custom-checkbox col-12 mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="school_level_ALP" name="school_level" value="1"> 
+                                    <label class="custom-control-label text-dark" for="school_level_ALP">Accelerated Learning Program</label>
+                                </div>   
+                                <!-- Default checked -->
+                                <div class="custom-control custom-checkbox col-12 mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="school_level_ABE" name="school_level" value="1"> 
+                                    <label class="custom-control-label text-dark" for="school_level_ABE">Alternative Basic Education</label>
+                                </div> 
+                                <!-- Default checked -->
+                                <div class="custom-control custom-checkbox col-12 mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="school_level_TVET" name="school_level" value="1" >
+                                    <label class="custom-control-label text-dark" for="school_level_TVET">Technical Vocation Education Training</label>
+                                </div>   
+                                <!-- Default checked -->
+                                <div class="custom-control custom-checkbox col-12 mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="school_level_daycare" name="school_level" value="1" >
+                                    <label class="custom-control-label text-dark" for="school_level_daycare">Daycare Services</label>
+                                </div> 
+                            </div>
+                        </div>
+                        <!-- Access to school -->
+                        <div class="mb-4">
+                            <div class="form-group mb-0">
+                                <label for="">11) <b>Access to school</b> Select all the ways in which your school is accessible  </label>
+                            </div>
+                            <div class="row p-3">
+                                <!-- Default unchecked -->
+                                <div class="custom-control custom-checkbox col-12 mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="access_to_school_Car" name="access_to_school" value="1">
+                                    <label class="custom-control-label text-dark" for="access_to_school_Car">With a car</label>
+                                </div>
+                                <!-- Default checked -->
+                                <div class="custom-control custom-checkbox col-12 mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="access_to_school_Motocycle" name="access_to_school" value="1">
+                                    <label class="custom-control-label text-dark" for="access_to_school_Motocycle">With a motocycle</label>
+                                </div>                            
+                                <!-- Default unchecked -->
+                                <div class="custom-control custom-checkbox col-12 mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="access_to_school_Canoe" name="access_to_school" value="1">
+                                    <label class="custom-control-label text-dark" for="access_to_school_Canoe">With a canoe</label>
+                                </div>
+                                <!-- Default checked -->
+                                <div class="custom-control custom-checkbox col-12 mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="access_to_school_Walking" name="access_to_school" value="1">
+                                    <label class="custom-control-label text-dark" for="access_to_school_Walking">By walking</label>
+                                </div>  
+                            </div>
+                        </div>
+                        <!-- Grade 6 WAEC code -->
+                        <div class="mb-4 p-0 waec_grade_6 hidden">
+                            <label for="waec_grade_6" class="text-dark font-weight-normal">11-a) Grade 6 WAEC Code. Write the WAEC code for Grade 6 examinations. If you do not have a Grade 6 WAEC code, please leave blank.</label>
+                            <input type="number" class="form-control waec_grade_6 WAEC_GRADE_SIX hidden" 
+                                name="waec_grade_6" 
+                                id="waec_grade_6" 
+                                onkeyup="maxInputLength('WAEC_GRADE_SIX', 11, 'Sorry, WAEC code must be 5-10 digits', 'waec_grade_6_err');" 
+                                autocomplete="off">
+                               <div class="waec_grade_6_err"></div>
+                        </div>
+                        <!-- Grade 9 WAEC code -->
+                        <div class="mb-4 p-0 waec_grade_9 hidden">
+                            <label for="waec_grade_9" class="text-dark font-weight-normal">11-b) Grade 9 WAEC code: Write the WAEC code for Grade 9 examinations. If the school does not know its Grade 9 WAEC code, please leave it blank.
+                            <input type="number" class="form-control waec_grade_9 WAEC_GRADE_NINE hidden" 
+                                name="waec_grade_9" 
+                                id="waec_grade_9" 
+                                onkeyup="maxInputLength('WAEC_GRADE_NINE', 11, 'Sorry, WAEC code must be 5-10 digits', 'waec_grade_6_err2');"
+                                autocomplete="off">
+                                <div class="waec_grade_6_err2"></div>
+                        </div>
+                        <!-- Grade 12 WAEC code -->
+                        <div class="mb-4 p-0 waec_grade_12 hidden">
+                            <label for="waec_grade_12" class="text-dark font-weight-normal">11-c) Grade 12 WAEC code: Write the WAEC code for Grade 12 examinations. If the school does not know its Grade 12 WAEC code, please leave it blank
+                            <input type="number" class="form-control hidden waec_grade_12 WAEC_GRADE_TWLEVE" 
+                                name="waec_grade_12" 
+                                id="waec_grade_12" 
+                                onkeyup="maxInputLength('WAEC_GRADE_TWLEVE', 11, 'Sorry, WAEC code must be 5-10 digits', 'waec_grade_6_err3');"
+                                autocomplete="off">
+                                <div class="waec_grade_6_err3"></div>
+                        </div>
+                        <!-- Boarding School -->
+                        <div class="mb-4">
+                            <!-- New Changes -->
+                            <label for="boarding_school">12) Is this school a boarding school?</label>
+                            <!--  -->
+                            <br><br>
+                            <label><input type="radio" name="boardingSchoolOption" id="boardingSchoolOption1" value="yes" required> Yes </label>
+                            <br>
+                            <label><input type="radio" name="boardingSchoolOption" id="boardingSchoolOption2" value="no"> No </label>
+
+                            <!-- <select class="browser-default custom-select md-custom-select text-dark font-weight-normal" 
+                            id="boarding_school"
+                            name="boarding_school" required autocomplete="off">
+                                <option selected disabled value="">Select an option</option>
+                                <option value="yes"> Yes </option>
+                                <option value="no"> No </option>
+                            </select> -->
+                        </div>
+                        <!-- Year of establishment -->
+                        <div class="mb-4 p-0">
+                            <!-- <i class="far fa-clock prefix fa-1x"></i> -->
+                            <label for="established_date">13) <b>Year of establishment</b> Write the YEAR the school was founded  </label>
+                            <input type="number" id="established_date" class="form-control established_date" 
+                            min="1822" 
+                            max="" 
+                            maxlength="4" 
+                            onkeyup="maxInputLength('established_date', 5, 'Year must be no more than 4 digits', 'established_date_error')"
+                            required autocomplete="off">
+                            <div class="established_date_error"></div>
+                        </div>
+                        <!-- submit button -->
+                        <div class="mb-4 p-0">
+                            <button type="submit" id="submit_profile" class="col-12 btn btn-primary">SAVE SCHOOL PROFILE</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>   
+    
+    <script src="js/jquery.js"></script>
+    <script type="text/javascript">
+				// NOTE: 
+				$("#School-Profile").find("input, textarea, select").on({
+					keyup: function() {
+						calculate_survey_completion("#School-Profile");
+					},
+					change: function() {
+						calculate_survey_completion("#School-Profile");
+					}
+				});
+				// NOTE: 
+				function calculate_survey_completion(targetForm) {
+
+					console.log( targetForm  )
+
+					let encrement = 0;
+					let counter = 0;
+					let filledCounter = 0;
+					let lengthOfRegularInputs  =  $(targetForm).find("input[type='text'], input[type='number'], input[type='email'], input[type='password'], textarea, select").length;
+					// 
+					let uniqueButtonNames   = getUniqueRadioButtonNames(targetForm);
+					let uniqueCheckboxNames = getUniqueCheckboxNames(targetForm);
+
+					// handle text, number, email, password, textarea, and select inputs
+					$(targetForm).find("input[type='text'], input[type='number'], input[type='email'], input[type='password'], textarea, select").each(function() {
+						let elem          =  $(this).attr('id');
+
+						if ( $(this).prop('nodeName') == "SELECT" ) {
+							if ($("#"+elem+" option:selected").val() == "") {
+								counter+=1;
+							} else {
+								filledCounter+=1;
+							}	
+						} 
+						else {
+							if ($("#"+elem).val() == "") {
+								counter+=1;
+							} else {
+								filledCounter+=1;
+							}						
+						}
+					});
+
+					// 
+					for (var i = 0; i < uniqueButtonNames.length; i++) {
+						if ( $('input[name="'+uniqueButtonNames[i]+'"]:checked').length > 0) {
+							filledCounter+=1;
+						} else {
+							counter+=1;
+						}
+					}
+
+					// 
+					for (var i = 0; i < uniqueCheckboxNames.length; i++) {
+						if ( $('input[name="'+uniqueCheckboxNames[i]+'"]:checked').length > 0) {
+							filledCounter+=1;
+						} else {
+							counter+=1;
+						}
+					}
+
+
+					$(".numerator").text( filledCounter );
+					$(".devisor").text( lengthOfRegularInputs + uniqueButtonNames.length );
+				}
+
+				// NOTE: 
+				function getUniqueRadioButtonNames(targetForm) {
+					// 
+					let inputButtons   =  $(targetForm).find("input[type='radio']");
+
+					var buttonNames = [];
+					inputButtons.each(function() {
+						buttonNames.push( $(this).attr('name') );
+					});
+
+					let uniqueButtonNames = [];
+					$.each(buttonNames, function(i, el) {
+					    if($.inArray(el, uniqueButtonNames) === -1) uniqueButtonNames.push(el);
+					});
+
+					return uniqueButtonNames;	
+				}
+
+				// NOTE: 
+				function getUniqueCheckboxNames(targetForm) {
+					// 
+					let inputButtons   =  $(targetForm).find("input[type='checkbox']");
+
+					var buttonNames = [];
+					inputButtons.each(function() {
+						buttonNames.push( $(this).attr('name') );
+					});
+
+					let uniqueButtonNames = [];
+					$.each(buttonNames, function(i, el) {
+					    if($.inArray(el, uniqueButtonNames) === -1) uniqueButtonNames.push(el);
+					});
+
+					return uniqueButtonNames;	
+				}
+
+    </script>
+ </body>
+ </html>
