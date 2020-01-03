@@ -22,5 +22,9 @@ The re-usable skeleton loader library provides an easy way for developers to con
 * bio:
 <pre class="bg-light"><code>tamma_skeleton_loader('.container', ['img.circle', 'p.short_center', 'p.center*4', 'p.short_center', 'img.regular*2', 'p.short_center', 'img.regular*2']);</code></pre>
 
+<img src="https://github.com/TammaCorporation/libraries/tree/master/tamma_skeleton_loader/1.gif">
+
+
+
 ### Contributors:
 * Mr. Michael Kaiva Nimley (Hercules) - C.T.O 1/3/2020
