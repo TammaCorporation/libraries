@@ -11,7 +11,7 @@ The re-usable skeleton loader library provides an easy way for developers to con
 ### Learn the (bootstrap style) Syntax:
 <pre class="bg-light"><code>tamma_skeleton_loader('any_area_on_page_to_target', ['specification (img, p, article, card, table) description (.center, .large, .medium, .regular etc) '])</code></pre>
 
-### Beautiful live Examples:
+### Beautiful live Samples:
 
 * fullpage:
 <pre class="bg-light"><code>tamma_skeleton_loader('body', ['p.center', 'img.large', 'p.short_center', 'img.regular*4', 'p.short', 'card.medium*2']);</code></pre>
@@ -20,7 +20,7 @@ The re-usable skeleton loader library provides an easy way for developers to con
 <pre class="bg-light"><code>tamma_skeleton_loader('.container', ['p.short', 'article.left', 'p.regular*4', 'p.short_center', 'table', 'p.short_center', 'img.regular*4']);</code></pre>
 
 * bio:
-<pre class="bg-light"><code>tamma_skeleton_loader('.container', ['p.center', 'p.small_center', 'p.short_center',  'p.regular',  'p.short_center', 'p.regular', 'p.short_center', 'p.center',  'p.small_center']);</code></pre>
+<pre class="bg-light"><code>tamma_skeleton_loader('.container', ['img.circle', 'p.short_center', 'p.center*4', 'p.short_center', 'img.regular*2', 'p.short_center', 'img.regular*2']);</code></pre>
 
 ### Contributors:
 * Mr. Michael Kaiva Nimley (Hercules) - C.T.O 1/3/2020
