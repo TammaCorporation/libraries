@@ -1,0 +1,29 @@
+.skeleton {
+    background:rgba(195, 195, 195, 0.4);
+}
+.sk-p-radius {
+    border-radius:10px;
+}
+.image {
+    width: 100%;
+    height: 200px;
+}
+.image-reg {
+    width: 100%;
+    height: 200px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+}
+.ske-image-round {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+}
+.ske-float {
+    display: inline-block;
+}

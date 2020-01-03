@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link id="stylesheet" rel="stylesheet" type="text/css" href="css/main.css">
+    <link id="stylesheet" rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link id="stylesheet" rel="stylesheet" type="text/css" href="css/css/icons.css">
+    <title>skeleton Loader Example</title>
+</head>
+<body>
+    <div class="container text-center border-bottom">
+        <h1>Re-usable skeleton loader</h1>
+        <p class="btn btn-outline-primary" id="load">Simulate Load</p>
+        
+        <p>Syntax:</p>
+        <pre class="bg-light"><code>tamma_skeleton_loader('any_area_on_page_to_target', ['specification (img, p, article, card, table) description (.center, .large, .medium, .regular etc) '])</code></pre class="bg-light">
+        <p>Example:</p>
+        <pre class="bg-light"><code>tamma_skeleton_loader('.container-fluid', ['p.center', 'p.small_center', 'p.short_center',  'p.regular',  'p.short_center', 'p.regular', 'p.short_center', 'p.center',  'p.small_center']);</code></pre>
+        
+        <p>Narrative:</p>
+        <p>provides an easy way to construct placeholders while making AJAX calls or waiting for an API to respond.</p>
+        <p><i>By: Hercules Nimley</i></p>
+    </div>
+    <div class="container-fluid mt-5 mb-5 main">
+        <div class="row cardList">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-3 coldspot "></div>
+            <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12 mb-3 hotspot"></div>
+            <div class="col-12 bottom-section mb-3"></div>
+        </div>
+    </div>
+<script type="text/javascript" src="js/jquery.js"></script> 
+<script type="text/javascript" src="js/tamma_skeleton_loader.js"></script>
+<script>
+    $("#load").click(function() {
+        $(this).text('Simulating data retrieval from DB.....');
+        // place content skeleton on page. (you can construct just about anything and target any part of your app)
+        fetchUserProfile();
+    });
+
+    // Simulator
+	let counter = 0;
+	function fetchUserProfile() {
+		counter++;
+        // 
+		const author = [
+			[],
+			[
+				'1.gif',
+				'Midnight Monroe',
+				'She\'s a facinating feline with the attitude of a princess',
+			],
+			[
+				'Ouxd.gif',
+				'Angry Peter',
+				'The exact opposit of Midnight. this fella is ferocious',
+			],
+			[
+				'jerry.jpg',
+				'Jerry Tiehn',
+				'Junior Dev at Tamma. he\'s a crazy dude who will make you laugh',
+			],
+			[
+				'mike.jpg',
+				'Hercules Nimley',
+				'He\'s the least skilled developer at Tamma',
+			],
+		];
+        // 
+		const article = [
+			[],
+			[
+				'When kings ruled',
+				'December 31, 2019',
+				'Introduction',
+				'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+				'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+			],			
+			[
+				'Why you shouldn\'t trust people',
+				'December 31, 2019',
+				'Introduction',
+				'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+				'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+			],
+			[
+				'Why designs are everything in technology',
+				'December 31, 2019',
+				'Introduction',
+				'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+				'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+			],
+			[
+				'The mind of a loser',
+				'December 31, 2019',
+				'Introduction',
+				'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+				'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+			],
+		];
+
+		let authorLimit = author.length;
+
+		if ( counter == author.length ) {
+			// content end. reset
+			counter = 0;
+		} 
+		else {
+
+            if (counter == 2 || counter == 4) {
+                // skeleton loader
+                tamma_skeleton_loader('.hotspot', ['p.short*2', 'article.left', 'p.short', 'p.regular*3', 'p.large']);
+
+                $('.coldspot').html('');
+                $('.bottom-section').html('');
+
+                setTimeout(() => {
+                    $(".hotspot").html('<h1>'+article[counter][0]+'</h1> <p><i>'+article[counter][1]+'</i></p> <div class="col-12 mb-5 p-0"> <img src="'+author[counter][0]+'" style="display:; width:30%;height:100px" align="left" class="rounded"> <p class=""><b>'+author[counter][1]+'</b></p> <p><i>' +author[counter][2]+ '</i></p>  </div>  <div class="mt-5 col-12 p-0"> <h3>'+article[counter][2]+'</h3> <p>'+article[counter][3]+'</p> <p>'+article[counter][4]+'</p> </div> ');
+
+                    $('#load').text('Load Next Content');
+                }, 4000);
+
+            } else {
+                // skeleton loader
+                tamma_skeleton_loader('.coldspot', ['img.circle', 'p.center', 'p.regular']);
+                tamma_skeleton_loader('.hotspot', ['p.center', 'p.short', 'p.large*3']);
+                tamma_skeleton_loader('.bottom-section', ['p.short', 'table']);   
+            
+                // delay and then insert author info and article
+                setTimeout(function() {
+                    $('.coldspot').html('<img src="'+author[counter][0]+'" style="display:block" class="ske-image-round"> <p class="text-center"><b>'+author[counter][1]+'</b></p>' + '<p><i>' +author[counter][2]+ '</i></p>');
+
+                    $(".hotspot").html('<h1>'+article[counter][0]+'</h1> <i>'+article[counter][1]+'</i> <h3>'+article[counter][2]+'</h3> <p>'+article[counter][3]+'</p> <p>'+article[counter][4]+'</p> ');
+                }, 4000);
+
+                // 
+                setTimeout(function() {
+                    $(".bottom-section").html("<h2>Products from around the web</h2> <table class='table'> <tr><th>Name</th><th>Price</th><th>Availibility</th></tr> <tr><td>Ice</td><td>100$</td><td>In Stock</td></tr> </table>");
+
+                    $('#load').text('Load Next Content');
+                }, 4000);
+            }
+
+
+
+			
+
+
+            
+		}
+	}
+</script>
+</body>
+</html>
