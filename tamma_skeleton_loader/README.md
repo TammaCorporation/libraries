@@ -12,8 +12,9 @@ The re-usable skeleton loader library provides an easy way for developers to con
 <pre class="bg-light"><code>tamma_skeleton_loader('any_area_on_page_to_target', ['specification (img, p, article, card, table) description (.center, .large, .medium, .regular etc) '])</code></pre>
 
 ### Beautiful live Samples:
+<hr>
 
-* fullpage:
+# fullpage:
 ### code:
 <pre class="bg-light"><code>tamma_skeleton_loader('body', ['p.center', 'img.large', 'p.short_center', 'img.regular*4', 'p.short', 'card.medium*2']);</code></pre>
 
@@ -21,7 +22,7 @@ The re-usable skeleton loader library provides an easy way for developers to con
 <img src="https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-9/81160489_1237564346453224_612304092634546176_o.jpg?_nc_cat=102&_nc_eui2=AeErH4uk7sWTRrPtwudYmscWAIrFl9BoU4cZQ7PEEUPFTLQ8w8edk8DNFnpHlksSvdf3sPaLYcAev73emiQ_t2wl3kIhn4ZL3f7VayFgIfAvgg&_nc_ohc=ZoNgG2IF76oAQmTtpl6gY_aCZWFDTTrd6R4xrCcItxaBbM_gR6-H6SJ9w&_nc_ht=scontent-cdt1-1.xx&oh=2eec3d75b01dc04d11600aa329715419&oe=5E9EBB6C" width="100%" height="500px">
 <hr>
 
-* blog:
+# blog:
 ### code:
 <pre class="bg-light"><code>tamma_skeleton_loader('.container', ['p.short', 'article.left', 'p.regular*4', 'p.short_center', 'table', 'p.short_center', 'img.regular*4']);</code></pre>
 
@@ -29,7 +30,7 @@ The re-usable skeleton loader library provides an easy way for developers to con
 <img src="https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-9/81274816_1237564359786556_1508429463958847488_o.jpg?_nc_cat=100&_nc_eui2=AeEgGLDouEZAU3Ly0YIfNuqk4EU09JEsQySIU6HeuO3zX_CUC6Ltu4dxHfxQHc8pcO8Ptcc9N23oq1rkozxNOYkjL62uB8KmqzSK-MSyIEWR3Q&_nc_ohc=QKUVWxqN-wsAQnXgGOzALZaRt9dUQTLV__IdlMVcJGGptLC7z6RyYVEbA&_nc_ht=scontent-cdt1-1.xx&oh=2e5957a648944f67873009073f4a9360&oe=5EA3E4FA" width="100%" height="500px">
 <hr>
 
-* bio:
+# bio:
 ### code:
 <pre class="bg-light"><code>tamma_skeleton_loader('.container', ['img.circle', 'p.short_center', 'p.center*4', 'p.short_center', 'img.regular*2', 'p.short_center', 'img.regular*2']);</code></pre>
 
