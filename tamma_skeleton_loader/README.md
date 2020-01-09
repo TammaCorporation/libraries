@@ -40,4 +40,5 @@ The re-usable skeleton loader library provides an easy way for developers to con
 
 
 ### Contributors:
-* Mr. Michael Kaiva Nimley (Hercules) - C.T.O 1/3/2020
+* Mr. Michael Kaiva Nimley (Hercules) - C.T.O - (developed the core) - 1/3/2020
+* Mr. Enoch Cooper Jallah - Architect - (added glow animation) - 1/7/2020
