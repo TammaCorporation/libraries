@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link id="stylesheet" rel="stylesheet" type="text/css" href="css/css/icons.css">
+	<style type="text/css">
+		
+	</style>
+</head>
+<body class="alert-light">
+
+	<div class="container">
+		<h2 class="text-center p-3">
+			Convert image to base64 & display base64 string as image
+		</h2>
+
+		<div class="container pb-4 bg-white rounded">
+			<div class="row">
+				<!-- start process by choosing a photo -->
+				<div class="container col-6 text-center mb-3">
+					<label class="col-12 p-0">Choose an image:</label>
+					<input type="file" id="files" name="files" class="btn btn-info" />
+					<div class="text-center load-spot"></div>
+				</div>
+				<!-- base64 string is dislayed here -->
+				<div class="col-12 mb-4">
+					<label class="col-12 p-0">Preview base64 data:</label>
+					<textarea id="base64" rows="5" cols="" class="form-control"></textarea>
+				</div>
+				<!-- base64 string is dynamically inserted into img source -->
+				<div class="container col-6 text-center">
+					<label class="col-12 p-0">Display base64 data as image:</label>
+					<img class="base64ImageData" src="" width="400px" height="400px">
+				</div>
+			</div>
+		</div>
+		
+		<br/>
+		
+		<br>
+
+		<p></p>
+
+		<!-- display base64 image -->
+		
+
+
+
+	</div>
+	
+	<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+	<script
+	  src="https://code.jquery.com/jquery-3.4.1.js"
+	  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	  crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+
+		// Check for the File API support.
+		if (window.File && window.FileReader && window.FileList && window.Blob) {
+		  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+		} else {
+		  alert('The File APIs are not fully supported in this browser.');
+		}
+
+		function handleFileSelect(evt) {
+		  $(".load-spot").html('Please Wait.....');
+
+		  var f = evt.target.files[0]; // FileList object
+		  var reader = new FileReader();
+		  // Closure to capture the file information.
+		  reader.onload = (function(theFile) {
+		    return function(e) {
+		      var binaryData = e.target.result;
+		      //Converting Binary Data to base 64
+		      var base64String = window.btoa(binaryData);
+		      // showing file converted to base64
+		      document.getElementById('base64').value = base64String;
+		      // insert base64 image data 
+		      $(".base64ImageData").attr( "src", 'data:image/png;base64,' +base64String);
+		      $(".load-spot").html('');
+
+		    };
+		  })(f);
+		  // Read in the image file as a data URL.
+		  reader.readAsBinaryString(f);
+		}		
+
+	</script>
+</body>
+</html>
