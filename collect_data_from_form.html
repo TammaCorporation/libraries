@@ -1,0 +1,46 @@
+<script>
+    // YOU NEED jQuery for this to work
+    
+    // Usage Example
+    $("#admin-signup-form").submit(function( event ) {
+        event.preventDefault();
+        // 
+        var formatted_form_data = extract_data_from_form("#admin-signup-form", "input, select");
+        // see console for example results
+        console.log(formatted_form_data);
+        
+    });
+    /**
+    * NOTE: 
+    * Usage guideline - 
+    * 1) give all fields a name using the name attribute eg: (name="gender")
+    * 2) give all select boxes an id attribute eg: (id="pick_shoes")
+    * 3) do not use input tags as submission buttons. opt for button tags instead
+    * 4) Returns result as [JavaScript Object]
+    *  LIMITATION: does not yet handle textareas
+     */
+    function extract_data_from_form(formIdentification, fieldName) {
+        var output = {};
+        $(formIdentification).find("input, select").each(function() {
+            let fieldName = $(this).attr('name');
+            let fieldId = $(this).attr('id');
+            let fieldType = $(this).attr('type');
+
+            if ( fieldType == "text" || fieldType == 'number'  || fieldType == 'email' ) {
+                // output.push( fieldName+':'+ $('input[name="'+fieldName+'"]').val() );
+                output[fieldName] = $('input[name="'+fieldName+'"]').val();
+            } 
+            else if( fieldType == "checkbox" ||  fieldType == "radio"  ) {
+                // output.push( fieldName+':'+ $('input[name="'+fieldName+'"]:checked').val() );
+                output[fieldName] = $('input[name="'+fieldName+'"]:checked').val();
+            } 
+            // select boxes
+            else {
+                // output.push( fieldName+':'+  $('#'+fieldId+' option:selected').val() );
+                output[fieldName] = $('#'+fieldId+' option:selected').val();
+            }
+        });
+        
+        return output;
+    }
+</script>
