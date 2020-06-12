@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="shortcut icon" href="../assets/media/img/" type="image/x-icon"> -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/animate.css">
+    <link rel="stylesheet" href="../assets/css/css/all.css">
+    <!-- <link rel="stylesheet" href="../assets/css/MDB-Free_4.19.0/css/bootstrap.css"> -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <title>HOPE CHINA | 401</title>
+    <style>
+        td {
+            min-width: 250px;
+        }
+        .table-icon-style {
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+            cursor: pointer;
+        }
+        .table-responsive {
+            overflow-y: hidden !important;
+        }
+
+
+
+        /* settings */
+        .settings-tab {
+            cursor: pointer;
+        }
+        .settings-tab-active {
+            padding-top: 2% !important;
+            padding-left: 2% !important;
+            padding-right: 2% !important;
+            border: 1px solid lightgray; 
+            background: white; 
+            border-bottom-color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <button data-toggle="modal" data-target=".bd-example-modal-lg">Modal</button>
+
+
+    <!-- modal to my settings -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    SETTINGS
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    
+                    <!-- toggable tabs -->
+                    <div class="col border-bottom">
+                        <span class="ml-2 p-1 settings-tab" data-target="#graphics-view">GRAPHICS</span>
+                        <span class="ml-2 p-1 settings-tab" data-target="#textual-content-view">TEXTUAL CONTENT</span>
+                    </div>
+                    <!-- graphics view -->
+                    <div id="graphics-view" class="settings-tab-view d-none p-3">
+                        graphics
+                        <p>Add your contents here........</p>
+                    </div>
+                    <!-- textual content view -->
+                    <div id="textual-content-view" class="settings-tab-view d-none p-3">
+                        textual
+                        <p>Add your contents here........</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <script src="../assets/js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+
+    <script>
+       
+
+        // setings
+        $(".settings-tab").click(function() {
+            $(".settings-tab").removeClass("settings-tab-active"); // remove active indicator form tabs
+            $(".settings-tab-view").addClass('d-none'); // hide currently visible tab view
+            $(this).addClass("settings-tab-active"); // show indicator on selected tab
+            let elementToDisplay = $(this).data('target'); // get id of tab view to make visible
+            $(elementToDisplay).removeClass('d-none'); // make user requested tab view visible
+        });
+    </script>
+
+
+    
+</body>
