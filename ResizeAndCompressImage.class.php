@@ -1,4 +1,5 @@
 <?php 
+    include_once(dirname(__FILE__).'/autoload.php');
     /**
      * *********************************************************************************************************
      * @_forProject: General Use | Developed At: TAMMA CORPORATION
@@ -10,20 +11,21 @@
      *      @contact Phone: (+231) 777-007-009
      *      @contact Mail: michaelkaivanimley.com@gmail.com, mnimley6@gmail.com, mnimley@tammacorp.com
      *   -------------------------------------------------------------------------------------------------------
-     *   2) Fullname of engineer. (Code Name)
-     *      @contact Phone: (+231) 000-000-000
-     *      @contact Mail: -----@tammacorp.com
+     *   2) Mr. Enoch C. Jallah 
+     *      @contact Phone: (+231) 775-901-684
+     *      @contact Mail: ejallah@tammacorp.com
      * *********************************************************************************************************
      */
 
-    class ResizeAndCompressImage
+    class ImageCompressor
     {
-        public $new_width;
-        public $new_height;
-        public $finalImage;
-        public $imageType;
-        public $imageCreatedFromFile;
-        public $requestedDimension;
+        public  $new_width;
+        public  $new_height;
+        public  $finalImage;
+        public  $imageType;
+        public  $imageCreatedFromFile;
+        public  $requestedDimension;
+        private $resizedImage; 
 
         // NOTE: supported image sizes
         public $supportedDimension = array(
@@ -38,10 +40,11 @@
         }
 
         public function getResizedImage() {
-            return $this->dimensionValidator();
+            $this->resizedImage = $this->dimensionValidator();
+            return $this->resizedImage;
         }
 
-        public function dimensionValidator() {
+        private function dimensionValidator() {
             switch ($this->options->dimension) {
                 case 'thumbnail_xs':
                 case 'thumbnail_sm':
@@ -82,15 +85,12 @@
             }
         }
 
-        public function processImageByType() {
-            // 
+        private function processImageByType() {
             if ( is_array($this->options->file_path) ) {
                 $this->imageType =  $this->options->file_path['type'];
             } else {
                 $this->imageType = pathinfo($this->options->file_path)['extension'];
             }
-
-            // 
             switch ( $this->imageType ) {
                 case 'jpg':
                 case 'jpeg':
@@ -104,6 +104,7 @@
                     break;
                 case 'image/jpg':
                 case 'image/jpeg':
+                case 'image/pjpeg':
                 case 'image/png':
                 case 'image/gif':
                     $this->imageType              =   explode("/", $this->imageType)[1];
@@ -124,32 +125,51 @@
             return $this->compressAndResizeImage();
         }
 
-        public function compressAndResizeImage() {   
+        private function compressAndResizeImage() {   
             // get image orginal width and height
             $img_original_width   =  imagesx($this->imageCreatedFromFile);
             $img_original_height  =  imagesy($this->imageCreatedFromFile);
             $makeImage            =  ($this->imageType == "jpg") ? 'imagejpeg' : 'image'.$this->imageType;
 
-            // Maintain aspect ratio
-            $source_image   =  $this->imageCreatedFromFile;
-            $source_imagex  =  imagesx($this->imageCreatedFromFile);
-            $source_imagey  =  imagesy($this->imageCreatedFromFile);
-            // 
+
+            if($this->new_width == 'default'){
+                $this->new_width = $img_original_width;
+            }
+            if($this->new_height == 'default'){
+                $this->new_height = $img_original_height;
+            }
+
+            if($this->new_width == 'auto' || $this->new_height == 'auto'){
+                $this->new_width  = $this->new_width == 'auto' && $this->new_height !="auto" ? $this->new_height : $this->new_width;
+                $this->new_height = $this->new_height == 'auto' &&  $this->new_width != 'auto' ?  $this->new_width : $this->new_height;
+
+                if($img_original_width > $img_original_height) 
+                {
+                    $this->new_height    =   $img_original_height*($this->new_height/$img_original_width);
+                }
+    
+                if($img_original_width < $img_original_height) 
+                {
+                    $this->new_width    =   $img_original_width*($this->new_width/$img_original_height);
+                }
+            }
+            
             $dest_imagex = $this->new_width;
             $dest_imagey = $this->new_height;
-            $dest_image = imagecreatetruecolor($dest_imagex, $dest_imagey);
+            $this->dest_image  = imagecreatetruecolor($dest_imagex, $dest_imagey);
 
             // specify quality of output
             if ( $this->options->quality == "low" ) {
-                imagecopyresized($dest_image, $source_image, 0, 0, 0, 0, $dest_imagex, $dest_imagey, $source_imagex, $source_imagey);
+                imagecopyresized($this->dest_image, $this->imageCreatedFromFile, 0, 0, 0, 0, $dest_imagex, $dest_imagey, $img_original_width, $img_original_height);
             } 
             else if ( $this->options->quality == "high" ) {
-                imagecopyresampled($dest_image, $source_image, 0, 0, 0, 0, $dest_imagex, $dest_imagey, $source_imagex, $source_imagey);
+                imagecopyresampled($this->dest_image, $this->imageCreatedFromFile, 0, 0, 0, 0, $dest_imagex, $dest_imagey, $img_original_width, $img_original_height);
             }
 
+            imagedestroy($this->imageCreatedFromFile);
             // scale image down to requested dimension
-            $newImg = imagescale ( $dest_image, $this->new_width, $this->new_height,  IMG_BILINEAR_FIXED );
-            // $newImg = imagescale ( $this->imageCreatedFromFile, $this->new_width, $this->new_height,  IMG_BILINEAR_FIXED );
+            $this->finialImage = imagescale ( $this->dest_image, $this->new_width, $this->new_height,  IMG_BILINEAR_FIXED );
+            // $this->finialImage = imagescale ( $this->imageCreatedFromFile, $this->new_width, $this->new_height,  IMG_BILINEAR_FIXED );
 
 
             // NOTE: to be able to process image and place it back into $_FILES
@@ -157,14 +177,12 @@
             // $img = file_get_contents($url); // get saved file
             // file_put_contents($tmpfname, $img); // place saved file into newly created tmp storage
 
-
-            // 
             if ( empty($this->options->save) ) {
                 return [
                     "status" => true,
                     "body" => [
                         "message" => "your image was resized and compressed. for useage instructions see ['implementation_guide']",
-                        "result"  => $newImg,
+                        "result"  => $this->finialImage,
                         "implementation_guide" => [
                             "save" => '  $img_thumb = $resizedImage->getResizedImage();
                             header("Content-Type: image/jpeg"); 
@@ -178,7 +196,7 @@
             } 
             elseif ( $this->options->save == "base64" ) {
                 ob_start (); 
-                    $makeImage( $newImg );
+                    $makeImage( $this->finialImage );
                     $image_data = ob_get_contents(); 
                 ob_end_clean (); 
                 return [
@@ -194,7 +212,7 @@
                 ];
             }
             else {
-                $result = $makeImage( $newImg, $this->options->save.".".$this->imageType ); 
+                $result = $makeImage( $this->finialImage, $this->options->save.".".$this->imageType ); 
                 // 
                 if ( $result == 1 ) {
                     return [
@@ -215,60 +233,15 @@
                 }
             }
         }
+
+        public function unsave(){
+            if(file_exists($this->options->save.".".$this->imageType) === true){
+                return unlink($this->options->save.".".$this->imageType);
+            }
+        }
+
+        public function get_extension(){
+            return $this->imageType;
+        }
     }
-    
-
-
-
-
-if ($_FILES['image']) {
-    //  STEP 1) instantiate compression class
-    $resizedImage = new ResizeAndCompressImage((object)[
-        "file_path"   =>  $_FILES['image'],  // path to image absolute/relative
-        "dimension"   =>  "thumbnail_xs",  // options: [thumbnail_xs], [thumbnail_sm], [thumbnail_m], [thumbnail_lg] or custom: array("width"=>240,"height"=>70)
-        "save"        =>  "base64", // options: [base64], [file_path and neme without extension]. if left empty, resized and compressed file resource id will be returned
-        "quality"     =>  "low" // options: [high]/[low]
-    ]);
-    // STEP 2) make call to [getResizedImage] method
-    $img_thumb = $resizedImage->getResizedImage();
-
-    // STEP 3) OPTIONAL - dump result to explore usage instructions
-    print "<pre>";
-        print_r($img_thumb);
-    print "</pre>";
-    
-    // QUICK PREVIEW EXAMPLE
-    ?>
-        <center style="margin-top:10%">
-            <img src="<?php echo $img_thumb['body']['result']; ?>" style="display:block; margin-bottom:3%;">
-            <img src="<?php echo $img_thumb['body']['result']; ?>" style="display:block; border-radius:50%">
-        </center>
-    <?php
-} else {
-    //  STEP 1) instantiate compression class
-    $resizedImage = new ResizeAndCompressImage((object)[
-        "file_path"   =>  "http://tammacorp.com/schoolmass/SETUP/photos/Miss%20Liberia.jpg",  // path to image absolute/relative
-        "dimension"   =>  "thumbnail_xs",  // options: [thumbnail_xs], [thumbnail_sm], [thumbnail_m], [thumbnail_lg] or custom: array("width"=>240,"height"=>70)
-        "save"        =>  "base64", // options: [base64], [file_path and neme without extension]. if left empty, resized and compressed file resource id will be returned
-        "quality"     =>  "low" // options: [high]/[low]
-    ]);
-    // STEP 2) make call to [getResizedImage] method
-    $img_thumb = $resizedImage->getResizedImage();
-
-    // STEP 3) OPTIONAL - dump result to explore usage instructions
-    print "<pre>";
-        print_r($img_thumb);
-    print "</pre>";
-    
-    // QUICK PREVIEW EXAMPLE
-    ?>
-        <center style="margin-top:10%">
-            <img src="<?php echo $img_thumb['body']['result']; ?>" style="display:block; margin-bottom:3%;">
-            <img src="<?php echo $img_thumb['body']['result']; ?>" style="display:block; border-radius:50%">
-        </center>
-    <?php    
-}
-
-
-
 ?>
