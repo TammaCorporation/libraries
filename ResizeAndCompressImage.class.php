@@ -244,4 +244,52 @@
             return $this->imageType;
         }
     }
+
+    if ($_FILES['image']) {
+        //  STEP 1) instantiate compression class
+        $resizedImage = new ResizeAndCompressImage((object)[
+            "file_path"   =>  $_FILES['image'],  // path to image absolute/relative
+            "dimension"   =>  "thumbnail_xs",  // options: [thumbnail_xs], [thumbnail_sm], [thumbnail_m], [thumbnail_lg] or custom: array("width"=>240,"height"=>70)
+            "save"        =>  "base64", // options: [base64], [file_path and neme without extension]. if left empty, resized and compressed file resource id will be returned
+            "quality"     =>  "low" // options: [high]/[low]
+        ]);
+        // STEP 2) make call to [getResizedImage] method
+        $img_thumb = $resizedImage->getResizedImage();
+
+        // STEP 3) OPTIONAL - dump result to explore usage instructions
+        print "<pre>";
+            print_r($img_thumb);
+        print "</pre>";
+
+        // QUICK PREVIEW EXAMPLE
+        ?>
+            <center style="margin-top:10%">
+                <img src="<?php echo $img_thumb['body']['result']; ?>" style="display:block; margin-bottom:3%;">
+                <img src="<?php echo $img_thumb['body']['result']; ?>" style="display:block; border-radius:50%">
+            </center>
+        <?php
+    } else {
+        //  STEP 1) instantiate compression class
+        $resizedImage = new ResizeAndCompressImage((object)[
+            "file_path"   =>  "http://tammacorp.com/schoolmass/SETUP/photos/Miss%20Liberia.jpg",  // path to image absolute/relative
+            "dimension"   =>  "thumbnail_xs",  // options: [thumbnail_xs], [thumbnail_sm], [thumbnail_m], [thumbnail_lg] or custom: ["width"=>240,"height"=>70] or ["width"=>'default',"height"=>'default'] or ["width"=>200,"height"=>'auto']
+            "save"        =>  "base64", // options: [base64], [file_path and neme without extension]. if left empty, resized and compressed file resource id will be returned
+            "quality"     =>  "low" // options: [high]/[low]
+        ]);
+        // STEP 2) make call to [getResizedImage] method
+        $img_thumb = $resizedImage->getResizedImage();
+
+        // STEP 3) OPTIONAL - dump result to explore usage instructions
+        print "<pre>";
+            print_r($img_thumb);
+        print "</pre>";
+
+        // QUICK PREVIEW EXAMPLE
+        ?>
+            <center style="margin-top:10%">
+                <img src="<?php echo $img_thumb['body']['result']; ?>" style="display:block; margin-bottom:3%;">
+                <img src="<?php echo $img_thumb['body']['result']; ?>" style="display:block; border-radius:50%">
+            </center>
+        <?php    
+    }
 ?>
