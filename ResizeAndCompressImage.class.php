@@ -1,5 +1,4 @@
 <?php 
-    include_once(dirname(__FILE__).'/autoload.php');
     /**
      * *********************************************************************************************************
      * @_forProject: General Use | Developed At: TAMMA CORPORATION
